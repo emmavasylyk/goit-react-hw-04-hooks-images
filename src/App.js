@@ -8,7 +8,7 @@ import Button from './components/Button';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import Modal from './components/Modal';
-import { toast } from 'react-toastify';
+import toastWarm from './helpers/toastWarn';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import s from './components/Loader/Loading.module.css';
@@ -51,15 +51,7 @@ export default function App() {
           setImageGallery(prevState => [...prevState, ...images]);
           setStatus('resolved');
         } else {
-          toast.warn(`По вашему запросу ${inputValue} ничего нет!`, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toastWarm(inputValue);
           setStatus('idle');
         }
       })
@@ -67,7 +59,6 @@ export default function App() {
         setError(error);
         setStatus('pending');
       });
-    // }
   }, [page, inputValue]);
 
   const hundleFormSubmit = inputQuere => {
